@@ -1,0 +1,47 @@
+{% load static %}
+{% load item_tags %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static "base/css/font-awesome.min.css" %}"
+          type="text/css">
+    <link rel="stylesheet" href="{% static  "base/css/neon.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "base/css/colorplate.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "base/css/base.css" %}" type="text/css">
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static "base/css/w3.css" %}">
+<style>
+
+
+</style>
+
+</head>
+<body>
+
+<script src="{% static "base/js/jQuery.js" %}"></script>
+<script src="{% static "base/js/popper.min.js" %}"></script>
+<script src="{% static "base/js/bootstrap.min.js" %}"></script>
+{% block botton_js %}
+{% endblock %}
+<script>
+    $("#mod").click(function () {
+        let now_state = $("#base").attr("class").trim()
+        let new_state = "light"
+        if (now_state === "light") {
+            new_state = "dark"
+        }
+        $("." + now_state.trim()).each(function () {
+            let new_class = ""
+            this.classList.forEach(function (element) {
+                new_class += " " + element.replace(now_state.trim(), new_state.trim())
+            })
+            $(this).attr("class", new_class)
+        })
+
+    })
+
+</script>
+
+</body>

@@ -1,0 +1,99 @@
+.red-light {
+    background-color: #F24C05;
+}
+
+.red-overflow-light {
+    background-image: linear-gradient(to bottom, #F24C05, rgba(0, 0, 0, 0.1)) !important;
+    opacity: 0.80 !important;
+}
+
+.red-overflow-dark {
+    background-image: linear-gradient(to bottom, #651e00, rgba(0, 0, 0, 0.1)) !important;
+    opacity: 0.80 !important;
+}
+
+.red-dark {
+    background-color: #651e00;
+}
+
+.yellow-light {
+    background-color: #F6FC38;
+}
+
+
+.yellow-dark {
+    background-color: #747800;
+}
+
+.blue-light {
+    background-color: #0F61DB;
+}
+
+.blue-overflow-light {
+    background-image: linear-gradient(to bottom, #0F61DB, rgba(0, 0, 0, 0.0)) !important;
+    opacity: 0.90;
+}
+
+.blue-dark {
+    background-color: #0b397f;
+}
+
+.blue-overflow-dark {
+    background-image: linear-gradient(to bottom, #061c3b, rgba(0, 0, 0, 0.0)) !important;
+    opacity: 0.90;
+}
+
+.sky-light {
+    background-color: #00D8CB;
+}
+
+.sky-overflow-light {
+    background-image: linear-gradient(to bottom, #00D8CB, rgba(0, 0, 0, 0.0)) !important;
+    opacity: 0.90;
+}
+
+.sky-overflow-dark {
+    background-image: linear-gradient(to bottom, #018e86, rgba(0, 0, 0, 0.0)) !important;
+    opacity: 0.90;
+}
+
+.sky-dark {
+    background-color: #037f77 !important;
+}
+
+.green-light {
+    background-color: #40DE07;
+    color: black !important;
+}
+
+.green-dark {
+    background-color: #237904 !important;
+    color: white !important;
+
+}
+
+.white-light {
+    background-color: #ffffff;
+}
+
+.white-dark {
+    background-color: #4c4c4c !important;
+}
+
+.light-text {
+    color: black !important;
+}
+
+.dark-text {
+    color: white !important;
+    background: transparent !important;
+}
+
+
+.black-light {
+    background-color: #343434;
+}
+
+.black-dark {
+    background-color: #000000;
+}

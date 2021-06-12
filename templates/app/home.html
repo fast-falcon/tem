@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}
+    تدوین مصرف (تم)
+{% endblock %}
+{% block content %}
+    <div class="row" dir="rtl" style="padding: 10%">
+        <div class="col-md-6 w-100 mt-4">
+            <img alt="تدوین مصرف (تم)" class="img-fluid d-block float-right h-100 rounded"
+                 src="{% static "base/css/images/logo.png" %}">
+        </div>
+        <div class="col-md-6 w-100 mt-4 ">
+            <h3 class="font-weight-bold">
+                چرا تدوین مصرف <span class="text-danger">تم</span>
+            </h3>
+            <div id="explain_txt">
+                با توجه به اینکه مقوله مصرف یکی از الزامات دائمی و پیوسته
+                انسان و جوامع می باشد و از آنجایی که انسان در هر شرایطی مجبور
+                به مصرف می باشد ،لذا با توجه به اهمیت مصرف و تداوم همیشگی آن
+                و تاثیری که مصرف و روشهای بررسی و انجام مصرف در سلامتی ،
+                صرفه جویی در زمان و سرنوشت مالی و اقتصادی خانواده ها دارد ،
+                لازم است خدمات جانبی پیرامون موضوع مصرف به مردم ارائه
+                شود ،تا پروسه مصرف و تامین و کنترل آن با حداکثر
+                کارایی در زندگی شخصی و اقتصادی انسانها تداوم یابد.
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include "base/footer.html" %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+    {% if message %}
+        {{ message }}
+    {% endif %}
+    {{ form.errors }}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="row text-center" style="">
+            <div class="col-sm-3"></div>
+            <div class="text-right col-md-3" style=""><a class="btn border border-light mr-3 mt-2 mb-3 btn-danger"
+                                                         href="#"><i
+                    class="fa fa-fw fa-reply d-inline-block fa-2x"></i>بازگشت</a></div>
+            <div class="shadow-lg border-right border-dark col-md-6 col-sm-5 col-12 pl-5 pr-5 pt-2 pb-1"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+                <div class="col-md-12 text-left "></div>
+                <h1 class="mb-4">ورود به حساب</h1>
+                <form>
+                    <div class="form-group"><input name="phone_number" class="form-control text-right shadow-lg" id="form9"
+                                                   placeholder="نام کاربری"></div>
+                    <div class="form-group mb-3"><input type="password" name="password" class="form-control text-right shadow-lg"
+                                                        id="form10" placeholder="کلمه عبور"></div>
+                    <button type="submit" class="btn btn-block btn-info shadow-lg">ورود</button>
+                </form>
+                <small class="form-text text-muted text-center">
+                    <a href="#"> ساخت حساب کاربری&nbsp;&nbsp;</a><a href="#">فراموشی کلمه عبور&nbsp;</a>
+                </small>
+                <div class="row mt-3">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

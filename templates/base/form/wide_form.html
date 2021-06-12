@@ -1,0 +1,31 @@
+{% load account_template_tags %}
+{% load form_template_tags %}
+
+<div {% if field.field.widget.is_hidden|is_true or field.field.widget.hidden|is_true %}style="display: none;"{% endif %}
+     class="form-group row {% if field.errors %}has-error{% endif %}">
+    <label class="col-sm-2 control-label">{{ field.label }}
+                                            {% if field.field.required %}<span class="required_field" style="color: red">*
+                                                </span>{% endif %}
+    </label>
+    <div class="col-sm-9">{% if form.todayrequest and field.name == 'is_urgent' %}
+        <img src="{% get_true_base64 %}" height="20px" width="20px">
+    {% else %}
+        {{ field|add_css:"form-control" }}
+    {% endif %}
+        <span class="help-block m-b-none"{% if form.todayrequest and field.name == 'is_urgent' %} style="color: red" {% endif %}>{{ field.help_text }}</span>
+    {% if first_step and field.name == 'visa_type' %}
+            <span class="help-block m-b-none" id="v-description"
+                                          style="color: #0e886f"></span>
+    
+    {% endif %}
+
+        {% if field.errors %}
+            <span class="help-block m-b-none" style="color: #ff0000">
+                                            {% for err in field.errors %}
+                                                {{ err }}
+                                            {% endfor %}
+                                            </span>
+        {% endif %}
+    </div>
+    <div class="col-sm-1"></div>
+</div>

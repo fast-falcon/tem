@@ -1,0 +1,20 @@
+{% load item_tags %}
+
+{% for item in items %}
+    {% if items|has_sub_menu %}
+        <button onclick="myFunction('id_{{ item|get_item_id }}')" class="w3-button id_{{ item|get_item_id }}">
+            {{ item|get_item_name }}
+        </button>
+    {% endif %}
+{% endfor %}
+{% for item in items %}
+    {% if items|has_sub_menu %}
+        <div id="id_{{ item|get_item_id }}" class="w3-hide w3-container light sky-light">
+            {% with items=items|filter_item:item %}
+                {% include "base/main_menu.html" %}
+            {% endwith %}
+        </div>
+    {% else %}
+        {% include "base/sub_menu.html" %}
+    {% endif %}
+{% endfor %}

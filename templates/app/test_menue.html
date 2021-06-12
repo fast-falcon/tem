@@ -1,0 +1,78 @@
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="http://127.0.0.1:8000/static/base/js/jQuery.js"></script>
+
+<body>
+<div class="w3-container">
+    <button onclick="myFunction('Demo1')" class="Demo1" class="w3-button ">
+        Normal button
+    </button>
+
+
+    <button onclick="myFunction('Demo2')" class="Demo2" class="w3-button ">
+        Left aligned and full-width
+    </button>
+
+
+    <button onclick="myFunction('Demo3')" class="Demo3" class="w3-btn">
+        Centered and full-width
+    </button>
+
+
+    <div id="Demo1" class="w3-hide w3-container w3-light-grey">
+        <button onclick="myFunction('Demo4')" class="Demo4" class="w3-button ">
+            Normal button
+        </button>
+        <button onclick="myFunction('Demo5')" class="Demo5" class="w3-button ">
+            Left aligned and full-width
+        </button>
+    </div>
+
+
+    <div id="Demo2" class="w3-hide w3-container">
+        <p>Lorem ipsum...</p>
+    </div>
+
+    <div id="Demo3" class="w3-hide w3-container w3-center w3-pale-red">
+        <p>Centered content as well!</p>
+    </div>
+
+    <div id="Demo4" class="w3-hide w3-container">
+        <p>Lorem ipsum.dsjklfkns..</p>
+    </div>
+
+
+    <div id="Demo5" class="w3-hide w3-container w3-center w3-pale-red">
+        <p>Centeredfdklkvsdk content as well!</p>
+    </div>
+</div>
+<script>
+    function myFunction(id) {
+        var x = $("#" + id);
+        $(".w3-show").each(function () {
+                let class_elem = $(this).attr("class")
+                let id_elem = $(this).attr("id")
+                if (id_elem !== id) {
+                    $(this).attr("class", class_elem.replace(" w3-show", ""))
+                }
+            }
+        )
+        let parent = $("." + id).parent()
+        let parent_class = parent.attr("class")
+        if (parent_class.indexOf("w3-show") === -1) {
+            parent.attr("class", parent.attr("class") + " w3-show")
+        } else {
+            parent.attr("class", parent.attr("class").replace(" w3-show", ""));
+        }
+        if (x.attr("class").indexOf("w3-show") === -1) {
+            x.attr("class", x.attr("class") + " w3-show")
+        } else {
+            x.attr("class", x.attr("class").replace(" w3-show", ""));
+        }
+    }
+</script>
+
+</body>
+</html>

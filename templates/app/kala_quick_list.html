@@ -1,0 +1,95 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div id="kala_quick_list" class="container">
+        <div class="row">
+            <div class="col-6">
+                <h4 id="kala_quick_list_title">
+                    کوئیک لیست :
+                </h4>
+            </div>
+
+            <div class="col-6">
+                <div id="kala_quick_list_btns" class="rounded-pill d-flex">
+                    <div id="kala_quick_list_share_btn" title="اشتراک گذاری" data-toggle="tooltip" data-placement="top"><i class="down_sign fas fa-share-alt"></i></div>
+                    <div id="kala_quick_list_copy_btn" title="کپی" data-toggle="tooltip" data-placement="top"><i class="down_sign fas fa-copy"></i></div>
+                    <div id="kala_quick_list_print" title="پرینت" data-toggle="tooltip" data-placement="top"><i class="fas fa-print"></i></div>
+                    <div id="
+                    kala_quick_list_serial" class="rounded-pill" title="شناسه سریال" data-toggle="tooltip" data-placement="right">{{ list.0.quick_list.track_code }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="share_box">
+            <i id="share_box_close" class="far fa-times-circle rounded-pill"></i><br>
+            <span>فضای مجازی مورد نظر خود را انتخاب نمایید.</span><br>
+
+            <div id="share_shapes_box">
+                <div class="d-flex justify-content-around">
+                    <i id="kala_quick_list_whatsApp_share" class="fab fa-whatsapp-square" title="whatsapp" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_twitter_share" class="fab fa-twitter-square" title="twitter" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_telegram_share" class="fab fa-telegram-plane" title="telegram" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_faceBook_share" class="fab fa-facebook-square" title="facebook" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_linkedin_share" class="fab fa-linkedin" title="linkedin" data-toggle="tooltip" data-placement="top"></i>
+                </div><br>
+                <div class="d-flex justify-content-around">
+                    <i id="kala_quick_list_google_plus_share" class="fab fa-google-plus-square" title="google_plus" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_reddit_share" class="fab fa-reddit-square" title="reddit" data-toggle="tooltip" data-placement="top"></i>
+                    <i id="kala_quick_list_pinterest_share" class="fab fa-pinterest-square" title="pinterest" data-toggle="tooltip" data-placement="top"></i>
+                    <!-- {% load static %}
+                    <i id="kala_quick_list_signal_share" title="signal" data-toggle="tooltip" data-placement="top"><img src="{% static 'app/icon/../../static/app/icon/signal.ico' %}"></i> -->
+                    <i id="kala_quick_list_email_share" class="fas fa-envelope-square" title="email" data-toggle="tooltip" data-placement="top"></i>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div id="kala_quick_list_items">
+            <div id="kala_quick_list_inf">
+                <div id="kala_quick_list_date">
+                    {{ list.0.quick_list.date }}
+                </div>
+
+                <div id="kala_quick_list_title">{{ list.0.quick_list.title }}</div>
+
+                <div id="kala_quick_list_explain">{{ list.0.quick_list.explain }}</div>
+            </div>
+
+            {% for item in list %}
+            <div class="kala_quick_list_item">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="kala_items_name">{{ item.name }}</div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="kala_items_explain">{{ item.explain }}</div>
+                    </div>
+
+                    <div class="col-3 d-flex">
+                        {% if item.explain == ' ' %}
+                        <i class="kala_question_sign fas fa-question-circle disable_click" title="توضیحات ندارد" data-toggle="tooltip" data-placement="right"></i>
+                        {% else %}
+                        <i class="kala_question_sign fas fa-question-circle" title="توضیحات" data-toggle="tooltip" data-placement="right"></i>
+                        {% endif %}
+                        <div class="kala_items_num">{{ item.num }}</div>
+                        <div class="kala_items_measurement">
+                            {% if item.measurement == 0 %}
+                            عدد
+                            {% elif item.measurement == 1 %}
+                            بسته
+                            {% elif item.measurement == 2 %}
+                            کیلوگرم
+                            {% elif item.measurement == 3 %}
+                            گرم
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

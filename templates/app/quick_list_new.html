@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load item_tags %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/fontawesome.min.css' %}">
+    <script src="{% static 'app/JS/jquery.formset.js' %}"></script>
+    <script src="{% static 'base/js/main.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div style="padding: 10%;width: 100%;" class="row" dir="rtl">
+        <div class="col-md-12 transparent-80 light white-light" style="border-radius: 25px;padding: 0!important;">
+            <div class="w3-container light blue-overflow-light"
+                 style="border-top-left-radius: 25px; border-top-right-radius: 25px;padding: 0!important;">
+                {% include "base/main_menu.html" %}
+            </div>
+            <div style="padding: 10px">
+
+                <form action="." method="post" id="quick_list_form">
+                    {% csrf_token %}
+                    <div class="list_info">
+                        <div id="list_name_box" class="d-flex">
+                            <label>عنوان لیست :</label>
+                            <button type="button" id="btn_title_voice" class="rounded voice_btn"><i
+                                    class="fas fa-microphone-alt"></i></button>
+                            <input type="text" id="list_name" name="title" class="form-control" autocomplete="off"
+                                   required>
+                        </div>
+
+                        <div id="list_explain_box" class="d-flex">
+                            <label>توضیحات لیست :</label>
+                            <button type="button" id="btn_explain_voice" class="rounded voice_btn"><i
+                                    class="fas fa-microphone-alt"></i></button>
+                            <textarea type="text" id="list_explain" name="explain" class="form-control"
+                                      required></textarea>
+                        </div>
+                    </div>
+                    <div id="empty_list">
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            لیست خرید شما خالی است!
+                        </div>
+                    </div>
+                    <div id="list_box" style="height: 500px">
+                        {{ form.extra_formset_html }}
+                    </div>
+
+
+                    <div id='security_box'>
+                        <div class='captcha_header'>لطفا کد امنیتی زیر را وارد نمایید.</div>
+                        <div class="security_code">
+                            <div class="row d-flex justify-content-around list_info" style="padding: 10px;margin: 10px">
+                                {#                                {{ form.captcha }}#}
+                                <input type="hidden" name="captcha_0" value="{{ form.captcha.field.widget.key }}"
+                                       required="" id="id_captcha_0">
+                                <div class="col-sm-2"></div>
+
+                                <div class="col-sm-2">
+                                    <img class=" captcha"
+                                         src="{% url "ecaptcha-image"  form.captcha.field.widget.key %}"
+                                         style="height: 60px">
+                                    <button class='js-captcha-refresh'>
+                                        <i class="fas fa-sync-alt" title="بازیابی کد" data-toggle="tooltip"
+                                           data-placement="top"></i>
+                                    </button>
+                                </div>
+                                <div class="userInput d-flex justify-content-center col-sm-6">
+                                    <input type="text" name="captcha_1" class="form-control rounded d-block"
+                                           placeholder="کد امنیتی ..." required>
+                                </div>
+                                <div class="col-sm-2"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="quick_list_form_btn" class="form-control rounded-pill">ذخیره لیست</button>
+                </form>
+            </div>
+
+            <div id="quick_list_sugestion" class="row" dir="rtl">
+                <div class="col-10">
+                    لطفا در صورت مشاهده مواردی که در کوئیک لیست موجود نیستند، آنها را از طریق لینک مقابل گزارش دهید.&nbsp;&nbsp;
+                    <a href="">ادامه...</a>
+                </div>
+
+                <div class="col-2 d-flex justify-content-start">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div id="basket_items_num"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "base/menu_script.html" %}
+{% endblock %}

@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <title>تدوین مصرف تم</title>
+        {% load static %}
+        <link rel="icon" type="image/icon" href="{% static 'app/logo/logo.ico' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/fontawesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'app/CSS/persian.datepicker.css' %}">
+        <link rel="stylesheet" href="{% static 'app/CSS/jquery-ui.css' %}">
+        <script src="{% static 'base/js/jQuery.js' %}"></script>
+        <script src="{% static 'app/JS/jquery-ui.js' %}"></script>
+        <script src="{% static 'app/JS/popper.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/CSS/bootstrap.min.css' %}">
+        <script src="{% static 'app/JS/jquery.powertip.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/CSS/jquery.powertip.min.css' %}">
+        <script src="{% static 'app/JS/persian.date.js' %}"></script>
+        <script src="{% static 'app/JS/persian.datepicker.js' %}"></script>
+        <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/CSS/style.css' %}">
+        <script src="{% static 'app/JS/style.js' %}"></script>
+    </head>
+    <body>
+        {# header #}
+        <div id="header" class="fixed-top row">
+            {# logo #}
+            <div id="logo_box" class="col-3">
+                {% load static %}
+                <a href="{% url 'app:home' %}">
+                    <img src="{% static 'app/logo/logo.png' %}" id="logo">
+                </a>
+            </div>
+            {# title #}
+            <div id="title_box" class="col-6">
+                <div class="d-flex justify-content-center">
+                    <div id="title" class="font-weight-bold rounded-pill">
+                        جاری سازی ارتباطات و اطلاعات در مصرف با تدوین مصرف
+                    </div>
+                </div>
+            </div>
+            {# button #}
+            <div id="btns" class="col-3">
+                <a href="{% url 'app:quick_list' %}" id="quick_btn" class="btn rounded-pill">
+                    <i class="far fa-list-alt"></i>
+                    <span>کو‌ئیک لیست</span>
+                </a>
+
+                <div id="menu_btn">
+                    <i id="menu_btn_icon" class="fas fa-bars"></i>
+                    <div id="menu_btn_box" class="position-fixed float-left">
+                        <a href="{% url 'app:quick_list' %}">
+                            <div>
+                                <i class="far fa-list-alt"></i>
+                                <span>کو‌ئیک لیست</span>
+                            </div>
+                        </a>
+
+                        <a href="">
+                            <div>
+                                <i class="far fa-file-alt"></i>
+                                معرفی
+                            </div>
+                        </a>
+
+                        <a href="">
+                            <div>
+                                 <i class="far fa-edit"></i>
+                                 خدمات
+                            </div>
+                        </a>
+
+                        <a href="">
+                            <div>
+                                <i class="far fa-bookmark"></i>
+                                مقاله ها
+                            </div>
+                        </a>
+
+                        <a href="">
+                            <div>
+                                <i class="far fa-envelope"></i>
+                                تیکت
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="menu_box" class="d-block shadow container">
+            <div id="menu" class="d-flex justify-content-start">
+                <a href="">
+                    <i class="far fa-file-alt"></i>
+                    معرفی
+                </a>
+
+                <a href="">
+                    <i class="far fa-edit"></i>
+                    خدمات
+                </a>
+
+                <a href="">
+                    <i class="far fa-bookmark"></i>
+                    مقاله ها
+                </a>
+
+                <a href="">
+                    <i class="far fa-envelope"></i>
+                    تیکت
+                </a>
+            </div>
+        </div>
+
+        <div id="mask"></div>
+        <div id="mask_share"></div>
+
+        {% block content %}
+        {% endblock %}
+
+        {# footer #}
+        <div id="footer">
+
+            <div class="row">
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">راهنمای تهییه لیست</div>
+                    <ul>
+                        <li>
+                            <a href="{% url 'app:quick_list' %}">کوئیک لیست</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">خدمات مشتریان</div>
+                    <ul>
+                        <li>
+                            <a href="">نظرات</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'app:reports' %}">گزارشات</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">ارتباط با ما</div>
+                    <ul>
+                        <li>
+                            ایمیل: <a href="">tadvinmasraf@gmail.com</a>
+                        </li>
+
+                        <li>
+                            شماره تماس: <a href="">---</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold"><span class="text-danger">تم</span> را در شبکه های اجتماعی دنبال کنید:</div>
+                    <ul class="d-flex justify-content-start">
+                        <li id="telegram">
+                            <a href=""><i class="fab fa-telegram"></i></a>
+                        </li>
+
+                        <li id="instagram">
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer_mobile">
+            <div id="footer_right" class="d-flex justify-content-around">
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">راهنمای تهییه لیست</div>
+                    <ul>
+                        <li>
+                            <a href="{% url 'app:quick_list' %}">کوئیک لیست</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">خدمات مشتریان</div>
+                    <ul>
+                        <li>
+                            <a href="">نظرات</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'app:reports' %}">گزارشات</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="footer_left" class="d-flex justify-content-around">
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">ارتباط با ما</div>
+                    <ul>
+                        <li>
+                            ایمیل: <a href="">tadvinmasraf@gmail.com</a>
+                        </li>
+
+                        <li>
+                            شماره تماس: <a href="">---</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold"><span class="text-danger">تم</span> را در شبکه های اجتماعی دنبال کنید:</div>
+                    <ul class="d-flex justify-content-start">
+                        <li id="telegram">
+                            <a href=""><i class="fab fa-telegram"></i></a>
+                        </li>
+
+                        <li id="instagram">
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,200 @@
+<html>
+    <head>
+        <title>تدوین مصرف تم</title>
+        {% load static %}
+        <link rel="icon" type="image/icon" href="{% static 'app/logo/../../static/app/logo/logo.ico' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/../../static/app/fontawesome/fontawesome-free-5.14.0-web/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'app/fontawesome/fontawesome-free-5.14.0-web/css/../../static/app/fontawesome/fontawesome-free-5.14.0-web/css/fontawesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'app/CSS/../../static/app/CSS/jquery-ui.css' %}">
+        <script src="{% static 'app/JS/../../static/app/JS/jQuery.js' %}"></script>
+        <script src="{% static 'app/JS/../../static/app/JS/jquery-ui.js' %}"></script>
+        <script src="{% static 'app/JS/../../static/app/JS/popper.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/CSS/../../static/app/CSS/bootstrap.min.css' %}">
+        <script src="{% static 'app/JS/../../static/app/JS/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/CSS/../../static/app/CSS/style.css' %}">
+        <script src="{% static 'app/JS/../../static/app/JS/style.js' %}"></script>
+    </head>
+    <body>
+        {# header #}
+        <div id="code_img" class="shadow">
+
+        </div>
+
+        <div id="code_img_txt">
+            <h4 class="text-danger">گزارش خطا</h4>
+            <div>
+                در صورت مشاهده نقص عملکرد، میتوانید با گزارش در این فرم ما را در بهتر ساختن
+                سامانه یاری کنید. پس از بررسی گزارش توسط تیم مربوطه در اسرع وقت مشکل رفع
+                خواهد شد.
+            </div>
+        </div>
+
+        <div id="gratitude_txt" class="d-flex justify-content-center sticky-top">
+            <div class="font-weight-bold">
+                ممنون از شما که ما را در بهبود سامانه یاری میکنید.
+            </div>
+        </div>
+
+        <div id="report_required">
+            <h6 class="font-weight-bold">گزارش خطا</h6>
+            <div>
+                لطفا فرم زیر را کامل نمایید.
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <form id="report_form" action="{% url 'app:send_report' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="report_title">موضوع :</label>
+                    {% if title_error %}
+                    <span class="text-danger" style="font-size: 0.8em">{{ title_error }}</span>
+                    <input type="text" name="report_title" id="report_title" class="form-control">
+                    {% elif text_error %}
+                    <input type="text" name="report_title" id="report_title" class="form-control" value="{{ report_title }}">
+                    {% else %}
+                    <input type="text" name="report_title" id="report_title" class="form-control">
+                    {% endif %}
+                </div>
+
+                <div class="form-group" id="report_txt_box">
+                    <label for="report_txt">متن گزارش :</label>
+                    {% if text_error %}
+                    <span class="text-danger" style="font-size: 0.8em">{{ text_error }}</span>
+                    <textarea name="report_text" id="report_txt" class="form-control"></textarea>
+                    {% elif title_error %}
+                    <textarea name="report_text" id="report_txt" class="form-control">{{ report_text }}</textarea>
+                    {% else %}
+                    <textarea name="report_text" id="report_txt" class="form-control"></textarea>
+                    {% endif %}
+                </div>
+
+                <div class="form-group" id="report_btn">
+                    <button type="submit" class="float-left rounded-pill">ثبت و ارسال</button>
+                    {% if message %}
+                        <span class="text-success">{{ message }}</span>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <div id="rule_box">
+            <h5 class="font-weight-bold">ضوابط و قوانین</h5>
+            <div>
+                لطفا توجه داشته باشید قبل از برطرف شدن خطای گزارش شده، هیچگونه اطلاعاتی در مورد آن را عمومی نکرده یا با دیگران به اشتراک نگذارید.
+                 همچنین به هیچ عنوان از مشکلات که یافته‌اید، بهره‌برداری و سوءاستفاده نکنید و به قوانین کشور پایبند باشید.
+                 با توجه به اهمیت خطای گزارش شده از سوی شما، ما در سریعترین زمان پیگیر گزارش شما خواهیم بود.
+            </div>
+        </div>
+
+        {# footer #}
+        <div id="footer">
+            <div class="row">
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">راهنمای تهییه لیست</div>
+                    <ul>
+                        <li>
+                            <a href="{% url 'app:quick_list' %}">کوئیک لیست</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">خدمات مشتریان</div>
+                    <ul>
+                        <li>
+                            <a href="">نظرات</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'app:reports' %}">گزارشات</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold">ارتباط با ما</div>
+                    <ul>
+                        <li>
+                            ایمیل: <a href="">tadvinmasraf@gmail.com</a>
+                        </li>
+
+                        <li>
+                            شماره تماس: <a href="">---</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footer_item">
+                    <div class="font-weight-bold"><span class="text-danger">تم</span> را در شبکه های اجتماعی دنبال کنید:</div>
+                    <ul class="d-flex justify-content-start">
+                        <li id="telegram">
+                            <a href=""><i class="fab fa-telegram"></i></a>
+                        </li>
+
+                        <li id="instagram">
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer_mobile">
+            <div id="footer_right" class="d-flex justify-content-around">
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">راهنمای تهییه لیست</div>
+                    <ul>
+                        <li>
+                            <a href="">کوئیک لیست</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">خدمات مشتریان</div>
+                    <ul>
+                        <li>
+                            <a href="">نظرات</a>
+                        </li>
+
+                        <li>
+                            <a href="">گزارشات</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="footer_left" class="d-flex justify-content-around">
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold">ارتباط با ما</div>
+                    <ul>
+                        <li>
+                            ایمیل: <a href="">tadvinmasraf@gmail.com</a>
+                        </li>
+
+                        <li>
+                            شماره تماس: <a href="">---</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 footer_item">
+                    <div class="font-weight-bold"><span class="text-danger">تم</span> را در شبکه های اجتماعی دنبال کنید:</div>
+                    <ul class="d-flex justify-content-start">
+                        <li id="telegram">
+                            <a href=""><i class="fab fa-telegram"></i></a>
+                        </li>
+
+                        <li id="instagram">
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

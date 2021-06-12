@@ -1,0 +1,175 @@
+{% load form_template_tags %}
+
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        margin-top: -10px; /* correct offset on first border spacing if desired */
+    }
+
+    @media screen and (max-width: 700px) {
+        table tr td {
+            display: block;
+            width: 100% !important;
+            margin: 0px !important;
+            border: none !important;
+        }
+
+        td:first-child {
+            border-right-style: solid;
+            border-bottom-right-radius: 0px !important;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+
+        td:last-child {
+
+            border-left-style: solid;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+
+    td {
+        border: 1px solid #009688;
+        padding: 10px;
+        background-color: #B2DFDB;
+        opacity: 80%;
+    }
+
+    td:first-child {
+        border-right-style: solid;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    td:last-child {
+
+        border-left-style: solid;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .input_td {
+        vertical-align: top;
+        margin-top: 10px
+    }
+
+    .input_td ul {
+        list-style: none;
+        color: red;
+        margin-top: 0;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="url"] {
+        width: 100%;
+    }
+
+    {% if not float_right %}
+        .input_td input {
+            float: none !important;
+        }
+    {% endif %}
+
+    td {
+        border-bottom: solid;
+        border-width: 2px 0;
+        border-bottom-color: rgba(128, 128, 128, 0.45);
+    }
+</style>
+<div class="ibox-content table-responsive" style="height: 100%; margin-top: 20px">
+    {#    <h3 id="extra" style="margin-bottom:10px;margin-top:0;">{{ title }}</h3>#}
+    <table id="{{ formset.prefix }}-table" class="table" dir="rtl">
+        {% for form in formset %}
+            {{ form.id }}
+            <tr style="height: 35px;margin-bottom: 10px;" class="kala_quick_list_item ">
+                {% for field in form %}
+                    {% if field.field.widget.input_type == 'hidden' %}
+                        {{ field }}
+                    {% else %}
+                        {% if 'row'  in field.field.widget.attrs.class %}
+                            {% if 'row1'  in field.field.widget.attrs.class %}
+                                <td class="input_td"></td>
+                                <td class="input_td{% if field.errors %} error_td{% endif %}"
+                                    style="padding: 2px;width: 60%">
+                            {% endif %}
+                        {% else %}
+                            <td class="input_td"></td>
+                            <td class="input_td{% if field.errors %} error_td{% endif %}" style="padding: 2px">
+                        {% endif %}
+                    {% if 'row' in field.field.widget.attrs.class %}
+                    {% endif %}
+                    {% if field.name != 'DELETE' %}
+                        {% if formset.readonly and field.field.widget.input_type == 'text' %}
+                            <p>{{ field.value }}</p>
+                        {% else %}
+                            {% if field.name == "name" %}
+                                <td style="width: 10%">
+                                    <label id="name" style="width: 100%"></label>
+                                    <input name="name" type="hidden" value="">
+                                </td>
+
+                            {% endif %}
+                            {% if field.name == "explain_item" %}
+                                <td style="width: 50%">
+                                    <textarea name="explain_item" class="item_explain form-control" placeholder="توضیحات ..."
+                                              style="display: inline-block; width: 100%"></textarea>
+                                </td>
+                                <td>
+                                    <i class="question_sign fas fa-question-circle" title="" data-toggle="tooltip"
+                                       data-placement="right" data-original-title="توضیحات"
+                                       style="margin-top: 18px;"></i>
+                                </td>
+                            {% endif %}
+                            {% if field.name == "num" %}
+                                <td style="width: 10%">
+                                    <input type="number" step="any" name="num" class="item_num form-control" min="0"
+                                           max="999999" autocomplete="off" style="width: 100%" placeholder="تعداد">
+                                </td>
+                            {% endif %}
+                            {% if field.name == "measurement" %}
+                                <td style="width: 10%">
+                                    {{ field|add_css:"form-control" }}
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <input type="hidden" name="{{ field.html_name }}" id="{{ field.auto_id }}">
+                    {% endif %}
+                        <span class="help-block m-b-none field-error" style="color: #ff0000">
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    </span>
+                    {% endif %}
+                {% endfor %}
+                <td style="display: none">
+                    <input type="hidden" name="extra_id" class="extra_id">
+                </td>
+                <td></td>
+            </tr>
+            <tr id="add-extra">
+
+            </tr>
+
+        {% endfor %}
+    </table>
+</div>
+{{ formset.management_form }}
+<script type="text/javascript">
+    $(function () {
+        var $formset_tr = $('#' + '{{ formset.prefix }}-table' + ' tr');
+        $formset_tr.formset({
+            prefix: '{{ formset.prefix }}',
+            formCssClass: 'dynamic-formset-{{ formset.prefix }}',
+            addText: '',
+            addCssClass: 'fa fa-plus add-row-button ',
+            deleteCssClass: 'delete-row-button',
+            deleteText: '<i class="close_item fas fa-times-circle" title="" data-toggle="tooltip" data-placement="top" data-original-title="حذف" style="margin-top: 18px;"></i>',
+            added: function check_date_and_time_picker() {
+
+            }
+        })
+    });
+</script>

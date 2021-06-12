@@ -1,0 +1,71 @@
+{% load static %}
+
+<script>
+    function myFunction(id) {
+        var x = $("#" + id);
+        $(".w3-show").each(function () {
+                let class_elem = $(this).attr("class")
+                let id_elem = $(this).attr("id")
+                if (id_elem !== id) {
+                    $(this).attr("class", class_elem.replace(" w3-show", ""))
+                }
+            }
+        )
+        let parent = $("." + id).parent()
+        let parent_class = parent.attr("class")
+        if (parent_class.indexOf("w3-show") === -1) {
+            parent.attr("class", parent.attr("class") + " w3-show")
+        } else {
+            parent.attr("class", parent.attr("class").replace(" w3-show", ""));
+        }
+        if (x.attr("class").indexOf("w3-show") === -1) {
+            x.attr("class", x.attr("class") + " w3-show")
+        } else {
+            x.attr("class", x.attr("class").replace(" w3-show", ""));
+        }
+    }
+</script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        var seleccted_list_ids = []
+        $('#basket_items_num').text(seleccted_list_ids.length)
+        $("#list_box").hide()
+        $(".child").click(function () {
+            let value = $(this).attr("value")
+            let name = $(this).text()
+            console.log(name)
+            if (seleccted_list_ids.includes(value)) {
+                seleccted_list_ids = delete_by_value(seleccted_list_ids, value)
+            } else {
+                seleccted_list_ids.push(value)
+                console.log(seleccted_list_ids)
+            }
+            let add_btn = $(".add-row-button")
+            $.data(add_btn[0], "value", {"name": name, "id_": value})
+            $.data(add_btn[0], "selects", seleccted_list_ids)
+            add_btn[0].click()
+            $('#basket_items_num').text(seleccted_list_ids.length)
+            if (seleccted_list_ids.length > 0) {
+                $("#empty_list").hide()
+                $("#list_box").show()
+            }
+            const sound = new Audio('{% static "app/sound/sound.mp3" %}');
+            sound.play();
+        })
+        $(".kala_quick_list_item").first().hide()
+        $(".add-row-button").hide()
+
+        $('.js-captcha-refresh').click(function () {
+            $.getJSON("/captcha/refresh/", function (result) {
+                $('.captcha').attr('src', result['image_url']);
+                $('#id_captcha_0').val(result['key'])
+            });
+            return false;
+        });
+    })
+</script>
